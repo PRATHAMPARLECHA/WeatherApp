@@ -1,18 +1,24 @@
 import React from "react";
+import { DateTime } from "luxon";
+
 
 const CurrentWeather = ({ value })=> {
+    const formatTolocalTime = (sec,zone,format = "cccc, dd LLL yyyy' | Local time: 'hh:mm a") => DateTime.fromSeconds(sec).setZone(zone).toFormat(format)
     return ( 
         <div>
-            {value.location && value.current ?
+            {value.name  ?
             (
-                <div className="br2 ba dark-gray b--black-10 mv4 w-100 w-50-m w-25-l mw5 center">
-                    <p>location: {value.location ? value.location.name : null}</p>
-                    <p>Condition: {value.current ? value.current.condition.text : null}</p>
-                    <img src={`${value.current.condition.icon}`} alt="weather-icon"/>
-                    <p>Temperature: {value.current ? `${value.current.temp_c}°C` : null}</p>
-                    <p>FeelsLke: {value.current ? value.current.feelslike_c : null}</p>
-                    <p>Humidity: {value.current ? value.current.humidity : null}</p>
-                    <p>Pressure: {value.current ? value.current.pressure_mb : null}</p>
+                <div>
+                    <div className="br2 ba dark-gray b--black-10 mv4 w-100 w-50-m w-25-l mw5 center">
+                        <p>location: {value.name ? value.name : null}</p>
+                        <p>Description: {value.weather[0] ? value.weather[0].description : null}</p>
+                        <p>{value.dt && value.timezone ? formatTolocalTime(value.dt,value.timezone, "ccc"): null}</p>
+                        <img src={`http://openweathermap.org/img/wn/${value.weather[0].icon}.png`} alt="icon"/>
+                        <p>Temperature: {value.main ? value.main.temp : null}</p>
+                        <p>Humidity: {value.main ? value.main.humidity : null}</p>
+                        <p>Pressure: {value.main ? value.main.pressure : null}</p>
+                        <p>Feels_like: {value.main ? value.main.feels_like : null}</p>
+                    </div>
                 </div>
             ):null}
         </div>

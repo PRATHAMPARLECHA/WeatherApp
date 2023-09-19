@@ -1,31 +1,27 @@
 import './App.css';
 import SearchBox from './SearchBox';
 import CurrentWeather from './CurrentWeather';
+import Hourly from './Hourly';
 import 'tachyons';
 import { useState } from 'react';
 
 function App() {
   const [cond, setCond] = useState({});
-  //const [error, setError] = useState('');
+  const [hour, setHour] = useState({});
    const onHandleChange = async(e) => {
     if(e.which === 13){
-      const url = `https://weatherapi-com.p.rapidapi.com/current.json?q=${e.target.value}`;
-      const options = {
-        method: 'GET',
-        headers: {
-          'X-RapidAPI-Key': 'f8d3e181d7msh6baccacb103e797p17b72ejsn4276367e6735',
-          'X-RapidAPI-Host': 'weatherapi-com.p.rapidapi.com'
-        }
-      };
-      
-      try {
-        const response = await fetch(url, options);
-        const result = await response.json();
+      fetch(`https://api.openweathermap.org/data/2.5/weather?q=${e.target.value}&appid=92318fb9cf82d8f3c0e07a15ee72fd4a&units=metric`)
+      .then(res => res.json())
+      .then(result => {
         setCond(result)
-        console.log(result);
-      } catch (error) {
-        console.error(error);
-      }
+        console.log(result)
+      })
+      fetch(`http://api.openweathermap.org/data/2.5/forecast?q=${e.target.value}&&appid=92318fb9cf82d8f3c0e07a15ee72fd4a&units=metric`)
+      .then(response => response.json())
+      .then(res => {
+        setHour(res)
+        console.log(res)
+      })
     e.target.value='';
     }
   }
@@ -33,6 +29,7 @@ function App() {
     <div className="tc">
       <SearchBox onValueChange={onHandleChange}/>
       {cond ? <CurrentWeather value={cond}/> : null}
+      {hour ? <Hourly value={hour}/> : null}
     </div>
   );
 }
