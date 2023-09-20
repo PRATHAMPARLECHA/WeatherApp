@@ -45,7 +45,7 @@ const Hourly = ({ value }) => {
           {value.list ? value.list.map((data, i) => {
             if (i >= 8 && i % 8 === 0) {
               return (
-                <AccordionItem key={i} className={`weather-card ${expandedIndex === i ? 'expanded' : ''} ml3 mr3 bg-mid-gray white pa4`} onClick={() => handleAccordionClick(i)}>
+                <AccordionItem key={i} className={`weather-card ${expandedIndex === i ? 'expanded' : ''} ml3 mr3  white pa4 br4`} onClick={() => handleAccordionClick(i)} style={{backgroundImage: `url(https://i.pinimg.com/564x/7e/81/ed/7e81ed0c2b211ba3e6cd8f3d09ea392e.jpg)`,backgroundSize: 'cover'}}>
                   <AccordionItemHeading>
                     <AccordionItemButton>
                       <p>{data.dt && value.city ? formatTolocalTime(data.dt, value.city.timezone, "cccc") : null}</p>
@@ -56,10 +56,10 @@ const Hourly = ({ value }) => {
                   {expandedIndex === i && (
                     <AccordionItemPanel>
                       <div>
-                        <p>Description: {data.weather[0] ? data.weather[0].description : null}</p>
-                        <p>Humidity: {data.main ? data.main.humidity : null}</p>
-                        <p>Pressure: {data.main ? data.main.pressure : null}</p>
-                        <p>Feels_like: {data.main ? data.main.feels_like : null}</p>
+                        <p>{data.weather[0] ? data.weather[0].description : null}</p>
+                        <p>{data.main ? `${data.main.humidity}%` : null}</p>
+                        <p>{data.main ? `${data.main.pressure}hPa` : null}</p>
+                        <p>{data.main ? `${data.main.feels_like}°C` : null}</p>
                       </div>
                     </AccordionItemPanel>
                   )}

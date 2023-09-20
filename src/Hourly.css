@@ -1,10 +1,10 @@
 .weather-card {
     border: 1px solid #ccc;
-    border-radius: 10px;
     padding: 10px;
     margin-bottom: 10px;
     cursor: pointer;
-    min-width: 180px;
+    min-width: 200px;
+    min-height: 250px;
   }
   
   .weather-card:hover {
@@ -24,24 +24,10 @@
     width: 50px;
     height: 50px;
   }
-  .weather-card {
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-bottom: 10px;
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
-  }
-  
-  .weather-card:hover {
-    background-color: #333;
-  }
-  
-  .weather-card.expanded {
-    border: 2px solid #333;
-  }
   
   .weather-card .icon {
-    width: 65
+    width: 65;
+    color: red;
   }  
   .spacing{
     justify-content: space-evenly;

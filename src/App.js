@@ -19,7 +19,7 @@ function App() {
       fetch(`https://api.openweathermap.org/data/2.5/weather?q=${e.target.value}&appid=92318fb9cf82d8f3c0e07a15ee72fd4a&units=metric`)
       .then(res => res.json())
       .then(result => {
-        setCond(result)
+        setCond(result) 
         console.log(result)
       })
       fetch(`http://api.openweathermap.org/data/2.5/forecast?q=${e.target.value}&&appid=92318fb9cf82d8f3c0e07a15ee72fd4a&units=metric`)
