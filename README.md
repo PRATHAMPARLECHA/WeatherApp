@@ -1,3 +1,5 @@
+# `WeatherApp`
+
 Install node modules
 ### `npm install`
 
